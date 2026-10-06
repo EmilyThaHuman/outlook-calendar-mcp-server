@@ -1,0 +1,48 @@
+# Cloudflare Workers configuration for Outlook Calendar MCP Server
+
+name = "outlook-calendar-mcp-server"
+main = "src/worker.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Worker settings
+# Wrangler will handle TypeScript compilation automatically
+
+# Environment variables
+[vars]
+MCP_SERVER_NAME = "outlook-calendar-mcp-server"
+MCP_SERVER_VERSION = "1.0.0"
+NODE_ENV = "production"
+PORT = "3003"
+
+# Secrets (use: wrangler secret put <SECRET_NAME>)
+# MICROSOFT_CLIENT_ID
+# MICROSOFT_CLIENT_SECRET
+# MICROSOFT_TENANT_ID
+# MICROSOFT_REDIRECT_URI
+# FRONTEND_URL
+# BACKEND_API_URL (optional - for token fallback from profile.settings.oauth_tokens)
+
+# KV Namespaces for session storage
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "71120461b40144899e639112365c061f"
+
+# Durable Objects for stateful session management (optional, for advanced use)
+# [[durable_objects.bindings]]
+# name = "OUTLOOK_SESSIONS"
+# class_name = "OutlookSessionManager"
+
+# Routes (optional - uncomment and configure if using custom domain)
+# routes = [
+#   { pattern = "outlook-calendar-mcp.zerotwo.app/*", zone_name = "zerotwo.app" }
+# ]
+
+# Development settings
+[env.development]
+vars = { NODE_ENV = "development" }
+
+# Production settings
+[env.production]
+vars = { NODE_ENV = "production" }
+
